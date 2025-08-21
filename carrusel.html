@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>100 Razones para Amarte </title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: linear-gradient(180deg, #02182e, #3d5369);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      overflow: hidden;
+    }
+    #container {
+      padding: 20px;
+      max-width: 500px;
+    }
+    .reason {
+      font-size: 1.2rem;
+      line-height: 1.5;
+      display: none;
+      animation: fadeIn 0.8s ease-in-out;
+    }
+    .reason.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .buttons {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    button {
+      background: rgba(255,255,255,0.2);
+      border: none;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 15px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: rgba(255,255,255,0.4);
+    }
+    img {
+      max-width: 100%;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+    a {
+      display: inline-block;
+      margin-top: 10px;
+      color: #fffa;
+      text-decoration: none;
+      background: rgba(255,255,255,0.1);
+      padding: 6px 12px;
+      border-radius: 10px;
+      transition: background 0.3s;
+    }
+    a:hover {
+      background: rgba(255,255,255,0.3);
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <h1>✧.*100 Razones para amarte✧.*</h1>
+    <div id="reasons"></div>
+    <div class="buttons">
+      <button onclick="prevReason()"> ≪•◦ ❈</button>
+      <button onclick="nextReason()">❈ ◦•≫</button>
+    </div>
+  </div>
+
+  <script>
+    const reasons = [
+      "Porque eres mi santuario. El lugar al que siempre vuelvo.",
+      "Porque aunque no estés aquí físicamente, siempre te siento cerca.",
+      "Porque a pesar de la distancia, sigues siendo mi persona favorita.",
+      "Porque me haces creer en el amor a kilómetros.",
+      "Porque aunque tu internet sea peor que el de un Nokia del 2005, siempre me esperas para hablar.",
+      "Porque incluso con lag, logras hacerme reír.",
+      "Porque tus mensajes llegan tarde, pero llegan con amor.",
+      { text: "Porque me tienes mal… y lo sabes.", link: "https://open.spotify.com/track/1lI3pfm02Fw6zajcGyxJsg?si=3KmEspa3QeyUNjk60xwHOw" },
+      { text: "Porque eres mi chico paranormal.", link: "https://open.spotify.com/track/3krzcyMKlRXjVkJFZqMN4t?si=OtpreXnkQyuWlile5NqdSw" },
+      "Porque tus palabras me derriten, no por lo que dicen, sino porque son tuyos.",
+      "Porque hasta cuando me tratas mal, te amo.",
+      "Porque tienes una manera de decir las cosas que me deja pensando horas.",
+      "Porque provocas que grite en la almohada.",
+      "Porque aunque no somos novios, eres la razón por la que volví a creer que se puede amar de nuevo.",
+      "Porque cada vez que te leo, sonrío como tonta.",
+      "Porque haces que un día gris se vuelva bonito con una sola palabra.",
+      "Porque cuando me hablas, aunque sea virtual, me siento cálida.",
+      "Porque sabes cómo hacerme enojar y cómo arreglarlo.",
+      "Porque contigo puedo ser un desastre y no me juzgas.",
+      "Porque conoces mi lado más raro y lo quieres igual.",
+      "Porque me entiendes incluso con un “ajá” o un sticker robado.",
+      "Porque tu voz me calma aunque estemos a horas de distancia, tus 'yaa', 'jiji', 'ya parale', 'ush'.",
+      "Porque me haces sentir bonita sin que lo intentes.",
+      "Porque hasta nuestras peleas me hacen quererte más.",
+      "Porque compartimos canciones que ya son nuestras.",
+      "Porque eres terco, y eso me gusta más de lo que debería.",
+      "Porque no te rendiste fácil conmigo.",
+      "Porque me aguantas, que no es tarea sencilla.",
+      "Porque siempre tienes algo que contarme, te escucharía por horas hablando de geis 2d.",
+      "Porque nuestras bromas internas son inentendibles para el resto.",
+      "Porque aunque se caiga tu señal, no se cae lo que siento por ti.",
+      "Porque me inspiras.",
+      "Porque me enseñas sin darme clases.",
+      "Porque me haces sentir especial solo con decir mi nombre.",
+      "Porque no te asusta verme vulnerable.",
+      "Porque compartes tus planes conmigo.",
+      "Porque me escuchas aunque no entiendas todo lo que digo.",
+      "Porque me cuidas aunque estés lejos.",
+      "Porque me entiendes de una forma muy figurativa y abstracta.",
+      "Porque podrían haber millones de chicos, pero ninguno se compara a ti.",
+      "Porque me dejas quererte a mi manera.",
+      "Porque confías en mí.",
+      "Porque confío en ti.",
+      { text: "Porque ahora yo, solo pienso en ti y ahora yo no puedo dormir, solamente sentado aquí pensando en cómo hacerte feliz, ahora yo solo pienso en ti.", link: "https://open.spotify.com/track/3H9GDhVVTlmFQSmpt51qiP?si=iWYUkJqCTiOilMG1JULbSQ" },
+      "Porque haces que hasta un silencio sea cómodo.",
+      "Porque tienes la capacidad de ponerme nerviosa y tranquila al mismo tiempo.",
+      "Porque me haces sentir que pertenezco a algún lugar, aunque ese lugar seas tú.",
+      { text: "Porque te vi a vos y el mundo cambió.", link: "https://open.spotify.com/track/4b2V2ZuTYELubat4l5qZaE?si=0JWutz36S-KotA4-4TAYsA" },
+      "Porque tu sinceridad me desarma.",
+      "Porque me entiendes hasta cuando hablo entre lloriqueos.",
+      "Porque me haces sentir afortunada de haberte conocido.",
+      "Porque me dejas aprender de ti.",
+      "Porque tus locuras son mejores cuando me incluyes.",
+      "Porque a veces eres un drama king y me encanta.",
+      "Porque eres constante.",
+      "Porque hasta en tu enojo encuentro ternura.",
+      { text: "Porque eres el bachira de mi isagi.", image: "bachira.jpeg" },
+      "Porque contigo puedo hablar de todo.",
+      "Porque incluso tus silencios dicen algo.",
+      "Porque me haces soñar con un futuro.",
+      "Porque eres mi ejemplo de que el amor no siempre se apaga.",
+      "Porque me recuerdas que soy capaz de sentir mucho.",
+      "Porque cada cosa tuya se me queda grabada.",
+      "Porque me haces reír en los peores momentos.",
+      "Porque no te da miedo mostrar quién eres.",
+      "Porque me respetas incluso en desacuerdo.",
+      "Porque tus palabras tienen el poder de cambiar mi día.",
+      "Porque no eres perfecto, y aun así eres perfecto para mí.",
+      "Porque siempre encuentras la forma de estar.",
+      "Porque haces que un simple “hola” me acelere el corazón.",
+      "Porque me conoces y no huyes. (a veces)",
+      "Porque me haces sentir orgullosa de ti y todo tu esfuerzo.",
+      "Porque admiro tu forma abstracta y relajada de ver la vida.",
+      "Porque compartes tus miedos conmigo.",
+      "Porque compartes tus alegrías conmigo.",
+      { text: "Porque eres la lluvia de mi trueno.", image: "lluvia.jpeg" },
+      "Porque eres un poco loco, pero es mi tipo de loco. (un poco mucho, muchisimo, MUCHO)",
+      "Porque puedo contarte cualquier miedo.",
+      "Porque me haces sentir segura de lo que siento.",
+      "Porque eres parte de mis mejores recuerdos.",
+      "Porque tu risa me gusta.",
+      "Porque cuando no hablamos, igual estás en mi cabeza.",
+      "Porque me haces sentir afortunada aunque estemos lejos.",
+      "Porque siempre tienes algo que contarme.",
+      { text: "PORQUE EN VERDAD NO TE DEJO DE PENSAR, CUANDO YΟ ΤΕ VI ΡASAR CON CARA SERIA PERO CON UN CORAZÓN QUE ENAMORA.", link: "https://open.spotify.com/track/2vHcT753gq1ADTPFcDuwSI?si=2sVogWRsTo6kiKbGhJztEg" },
+      { text: "Porque tienes unos ojos que iluminarían Manhattan.", image: "ojos.jpeg" },
+      { text: "Porque me caes muy bien.", image: "caerbien.jpeg" },
+      "Porque me acompañas incluso sin estar físicamente.",
+      "Porque hasta tus defectos me gustan.",
+      "Porque tienes un corazón enorme.",
+      "Porque me das razones para sonreír cada día.",
+      "Porque me quieres a tu manera.",
+      "Porque yo te amo a la mía.",
+      "Porque eres mi amigo y mi amor al mismo tiempo.",
+      "Porque contigo todo es más bonito.",
+      { text: "Porque… solo por vos.", link: "https://open.spotify.com/track/0qhynIDQPUYENhtIQ3TUyE?si=nr9Wiei7RB2J95-iM7SZqA" },
+      "Porque no dejas de sorprenderme.",
+      "Porque incluso con tus fallas, eres mi persona favorita.",
+      "Porque a pesar de todo, sigues aquí.",
+      "Porque.. si quedan cenizas, las vuelvo a prender Si ya no queda tiempo, te llevo al ayer Si el mundo se cae, lo vemos caer Por tus besos fríos que me hacen arder Ya no quiero más caos, no quiero más guerras Por vos me dejaba la sangre en la tierra Cruzaba los mares, moría en las tinieblas Mataba la luna trepando la sierra",
+      { text: "Porque eres tú… y eso basta.", image: "juntos.jpeg" }
+    ];
+
+    let current = 0;
+    const reasonsDiv = document.getElementById("reasons");
+
+    function showReason(index) {
+      let reason = reasons[index];
+      let text = typeof reason === "string" ? reason : reason.text;
+      let html = `<p class="reason active"><strong>${index+1}.</strong> ${text}</p>`;
+      if (typeof reason !== "string") {
+        if (reason.image) {
+          html += `<img src="${reason.image}" alt="Imagen razón ${index+1}">`;
+        }
+        if (reason.link) {
+          html += `<a href="${reason.link}" target="_blank">❈ ◦•≫🎶ESCUCHA ESTA PLIS🎶≪•◦ ❈</a>`;
+        }
+      }
+      reasonsDiv.innerHTML = html;
+    }
+
+    function nextReason() {
+      if (current < reasons.length - 1) {
+        current++;
+        showReason(current);
+      }
+    }
+
+    function prevReason() {
+      if (current > 0) {
+        current--;
+        showReason(current);
+      }
+    }
+
+    showReason(current);
+  </script>
+</body>
+</html>
